@@ -35,7 +35,7 @@ project
 $ ./encrypt coverMedium secretMedium
 ```
 The cover file should have at least 8 times as many pixels as the 
-secret medium + 24 bytes for the secret image dimensions to be held. 
+secret medium + 8 pixels for the secret image dimensions to be held. 
 - To decrypt a file run:
 ```console 
 $ ./decrypt filename.png 

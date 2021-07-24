@@ -5,7 +5,7 @@ This tool is used to essentially hide one image within another by altering the l
 The dimensions and number of channels for the secret image is embedded in the cover image. This means we don't <br>
 have to manually keep track of them to restore the secret image.
 
-## prerequisites
+## dependencies
     
 - stb_image library (https://github.com/nothings/stb)
 

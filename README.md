@@ -1,5 +1,8 @@
 # LSB-Insertion-Tool
 
+## Purpose
+This tool is used to essentially hide one image within another by altering the least signficant bit of each element of each pixel in the cover image.
+
 ## prerequisites
     
 - stb_image library (https://github.com/nothings/stb)

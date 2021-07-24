@@ -1,7 +1,9 @@
 # LSB-Insertion-Tool
 
 ## Purpose
-This tool is used to essentially hide one image within another by altering the least signficant bit of each element of each pixel in the cover image.
+This tool is used to essentially hide one image within another by altering the least signficant bit of each element of each pixel in the cover image.<br>
+The dimensions and number of channels for the secret image is embedded in the cover image. This means we don't <br>
+have to manually keep track of them to restore the secret image.
 
 ## prerequisites
     
@@ -36,15 +38,14 @@ The cover file should have at least 8 times as many pixels as the
 secret medium. 
 - To decrypt a file run:
 ```console 
-$ ./decrypt filename.png secretWidth secretHeight [channels]
+$ ./decrypt filename.png 
 ```
 Where channels is optional with a default value of 3.
 The input file is a png since `encrypt.c` outputs a png. 
 
 ## Future plans
 
-- Embed the dimensions of then secret image into the cover medium. This will mean we dont <br>
-have to keep track of the dimensions manually 
+
 - Allow text files to be used as secret medium 
 
 

@@ -32,6 +32,8 @@ project
 ```console
 $ ./encrypt coverMedium secretMedium
 ```
+The cover file should have at least 8 times as many pixels as the 
+secret medium. 
 - To decrypt a file run:
 ```console 
 $ ./decrypt filename.png secretWidth secretHeight [channels]

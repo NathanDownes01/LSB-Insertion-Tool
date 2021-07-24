@@ -40,3 +40,11 @@ $ ./decrypt filename.png secretWidth secretHeight [channels]
 ```
 Where channels is optional with a default value of 3.
 The input file is a png since `encrypt.c` outputs a png. 
+
+## Future plans
+
+- Embed the dimensions of then secret image into the cover medium. This will mean we dont <br>
+have to keep track of the dimensions manually 
+- Allow text files to be used as secret medium 
+
+

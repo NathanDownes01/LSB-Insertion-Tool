@@ -8,7 +8,7 @@ have to manually keep track of them to restore the secret image. <br>
 When storing this, we use 11 bits for secret image width, 11 bits for secret image height and 2 bits for secret image <br>
 colour channels. This means the maxium dimensions for a secret image are 2047px x 2047px.
 
-## dependencies
+## Dependencies
     
 - stb_image library (https://github.com/nothings/stb)
 

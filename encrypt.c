@@ -11,7 +11,7 @@ const int secretWidthBits = 11;
 const int secretChannelBits = 2;
 const int secretDataBits = secretChannelBits + secretHeightBits + secretWidthBits; //24 bits are used to store secret image data (width, height and channels)
 
-/* converts an 8 bit integer to its binary form */
+/* converts an n bit integer to its binary form */
 void intToBin(int x, unsigned char *bin, int bits){
     int i = 1 << (bits-1);
     for(;i>0;i/=2){
@@ -29,7 +29,7 @@ void intToBin(int x, unsigned char *bin, int bits){
     start: The starting index of the array
     bits: The bits needed to store decValue  */
 void insertBinaryData(int decValue, unsigned char *binArr, int start, int bits ){
-    unsigned char *tmp = (unsigned char *)calloc(bits + 1, sizeof(char));
+    unsigned char *tmp = (unsigned char *) calloc(bits + 1, sizeof(unsigned char));
     if (tmp == NULL)
     {
         printf("ERROR");
@@ -64,27 +64,28 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    /*
-        TODO
-        ensure secret dimensions and channels are less than 11,11,2 bits
-    */
+    if (secretWidth >= 1 << secretWidthBits || secretHeight >= 1 << secretHeightBits //ensure secret image dimensions can fit in bits allocated for header
+         || secretChannels >= 1 << secretChannelBits){
+        printf("Secret image is too large to be handled by this program.");
+        exit(0);
+    }
 
-    int length = secretWidth*secretHeight*secretChannels;
+        int length = secretWidth * secretHeight * secretChannels;
     if (length*8 + secretDataBits >coverWidth*coverHeight*coverChannels) {  //ensure secret image will fit in cover image
-        printf("secret medium is too large");
+        printf("secret medium is too large to fit in cover image");
         exit(0);
     }
 
 
-    unsigned char *secretBin = (unsigned char *) calloc(secretDataBits + length*8,sizeof(char)); //get binary of secret pixels 
-    int i;
+    unsigned char *secretBin = (unsigned char *) calloc(secretDataBits + length*8,sizeof(unsigned char)); //get binary of secret pixels 
 
     // inserting image dimension data
     insertBinaryData(secretHeight, secretBin, 0, secretHeightBits);
     insertBinaryData(secretWidth, secretBin, secretHeightBits, secretWidthBits);
     insertBinaryData(secretChannels, secretBin, secretHeightBits + secretWidthBits, secretChannelBits);
 
-    for(i = secretDataBits; i<length + secretDataBits; i++){
+    int i;
+    for(i = secretDataBits; i<length + secretDataBits; i++){    //convert and insert image pixel data
         insertBinaryData(secret[i-secretDataBits], secretBin, i + (i-24)*7,8);
     }
 
